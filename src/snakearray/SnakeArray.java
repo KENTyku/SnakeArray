@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Use and copying for commercial purposes 
+ * only with the author's permission
  */
 package snakearray;
 
@@ -20,50 +19,50 @@ public class SnakeArray {
     public static void main(String[] args) {
         
         int n;
+        int [] ar;        
         
+        //запрос числа
         System.out.println("Введите положительное целое число");
         Scanner in = new Scanner(System.in);
         n=in.nextInt();
-        int [] ar=new int[n*n];
+        
+        //формируем массив
+        ar=new int[n*n];
         for (int i=0;i<n*n;i++){
             ar[i]=i+1;
-        }
+        }    
         
-        for (int i=0;i<n*n;i++){
-            System.out.print(ar[i]);
-        }
-        System.out.println();
-        int[][] a=new int[n][n];
-        int count;
-        int vitok;
-        int gor1;
-        int vert1;
-        int gor2;
-        int vert2;
+        //работаем через матрицу n*n
+        int count; 
+        int vitok;//номер витка
+        int gor1;//индексы верхней горизонтали витка
+        int vert1;//индексы правой вертикали витка
+        int gor2;//индексы нижней горизонтали витка
+        int vert2;//индексы левой вертикали витка
         int i,j;
-       
-//        System.out.println((N+1)/2);
+        int[][] a=new int[n][n];
+
         count=0;
-//          {цикл, который отвечает за количество витков спирали}
+//          цикл количества обходов (витков спирали}
         for (vitok=0;vitok<(n/2);vitok++) {
         
-//          {цикл, верхней горизотальной части витка}
+//          цикл верхней горизотальной части витка
             for(gor1=vitok;gor1<n-1-vitok;gor1++){
-                a[vitok][gor1]=ar[count];
+                a[vitok][gor1]=ar[count];//передаем значения из массива в матрицу
                 count++;
             }
-//          {цикл, правой вертикальной части витка (той, что сверху вниз)}  
+//          цикл правой вертикальной части витка  
             for(vert1=vitok;vert1<n-1-vitok;vert1++){
-                a[vert1][((n-1)-vitok)]=ar[count];
+                a[vert1][((n-1)-vitok)]=ar[count];//передаем значения из массива в матрицу
                 count++;
             }
-//          {цикл, нижней горизонтальной части витка (той, что справа налево)}  
-          for (gor2=((n-1)-vitok); gor2>vitok;gor2--){//g3:=((N+1)-vitok) downto vitok+1 do
-              a[((n-1)-vitok)][gor2]=ar[count];
+//          цикл, нижней горизонтальной части витка   
+          for (gor2=((n-1)-vitok); gor2>vitok;gor2--){
+              a[((n-1)-vitok)][gor2]=ar[count];//передаем значения из массива в матрицу
               count++;
           }
-//          {цикл, левой вертикальной части витка (той, что снизу вверх)}  
-          for (vert2=(n-1-vitok);vert2>vitok;vert2--){//(g4:=((N+1)-vitok) downto vitok+1 do
+//          цикл, левой вертикальной части витка  
+          for (vert2=(n-1-vitok);vert2>vitok;vert2--){
               a[vert2][vitok]=ar[count];
               count++;
           }
@@ -74,14 +73,16 @@ public class SnakeArray {
             a[(n/2)][n/2]=n*n;
         }
      
-      for (i=0;i<n;i++){
-      
-        for (j=0;j<n;j++){
-          System.out.printf("%"+(n/10+2)+"d",a[i][j]);
-          System.out.print("  ");
+        //вывод результата в консоль
+        for (i=0;i<n;i++){
+
+            for (j=0;j<n;j++){
+                //учитываем форматирование для малых и больших чисел матрицы
+                System.out.printf("%"+(n/10+2)+"d",a[i][j]); 
+                System.out.print("  ");
+            }
+            System.out.println();
         }
-        System.out.println();
-      }
     }
     
 }
